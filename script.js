@@ -8,15 +8,28 @@ let timeId,
 function myAnimation() {
 	const elem = document.querySelector('.box')
 	let pos = 0
+	let forward = false
 
 	const id = setInterval(frame, 10)
 	function frame() {
-		if (pos == 300) {
-			clearInterval(id)
-		} else {
+		if (pos < 301 && !forward) {
 			pos++
 			elem.style.top = pos + 'px'
 			elem.style.left = pos + 'px'
+		}
+
+		if (pos == 299) {
+			forward = true
+		}
+
+		if (pos < 0 || pos == 300 || forward) {
+			pos--
+			elem.style.top = pos + 'px'
+			elem.style.left = pos + 'px'
+		}
+
+		if (pos == 0) {
+			clearInterval(id)
 		}
 	}
 }
